@@ -1,0 +1,54 @@
+import random
+from os import system
+
+art = ('''
+____ _  _ ____ ____ ____    _  _ _  _ _  _ ___  ____ ____ 
+| __ |  | |___ [__  [__     |\ | |  | |\/| |__] |___ |__/ 
+|__] |__| |___ ___] ___]    | \| |__| |  | |__] |___ |  \ 
+                                                          
+                                                                                                                                                                        
+''')
+
+def compare_guess_number(computer, user, live):
+    if user > computer:
+        print('Too high')
+        return live - 1
+    elif user < computer:
+        print('Too low')
+        return live - 1
+    else:
+        print(f'YEAH !! Correct the number was {computer}')
+
+easy = 10
+hard = 5
+
+def game_mode():
+    mode = input('what mode would you like? [H]ard , [E]asy : ').upper()
+    if mode == 'H':
+        return hard
+    else:
+        return easy
+
+
+
+def game():
+    print(art)
+    computer_guess = random.randint(1,100)
+    live = game_mode()
+    user_guess = 0
+    while live != 0 and user_guess != computer_guess:
+        print(f'answer is {computer_guess}')
+        print(f'you have {live} lives left.')
+        user_guess = int(input('guess number between 1-100 : '))
+        live = compare_guess_number(computer_guess, user_guess, live)
+
+    if live == 0:
+        print(f'GAME OVER ! correct number is {computer_guess}')
+    if input('play again? (y/n) : ') == 'y':
+        system('cls')
+        game()
+    
+
+
+game()
+
